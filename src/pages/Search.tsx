@@ -3,6 +3,7 @@ import { CustomInput } from "../components/input";
 import { ArrowLeft, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import BottomNav from "../components/BottomNav.tsx/bottomNav";
+import * as SC from "../../style";
 
 export default function SearchFunction() {
   const [movieName, setMovieName] = React.useState("");
@@ -16,7 +17,7 @@ export default function SearchFunction() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
+    <SC.Main3 className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-container text-light-text p-8 rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center align-top">
         <span className="flex items-center gap-[33%]">
           <Link to="/">
@@ -41,6 +42,6 @@ export default function SearchFunction() {
         </form>
         <BottomNav />
       </div>
-    </div>
+    </SC.Main3>
   );
 }

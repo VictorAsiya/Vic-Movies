@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Bookmark } from "lucide-react";
+import * as SC from "../../style";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -57,7 +58,7 @@ export default function MovieDetail() {
   if (!movie) return <div className="text-white p-10">Loading...</div>;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
+    <SC.Main4 className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-container text-light-text py-8 rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center align-top">
         <span className="flex justify-between items-center px-3 mb-5">
           <Link to="/">
@@ -137,6 +138,6 @@ export default function MovieDetail() {
           </button>
         </div>
       </div>
-    </div>
+    </SC.Main4>
   );
 }
