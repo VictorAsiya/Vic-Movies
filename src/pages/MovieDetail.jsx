@@ -83,34 +83,105 @@ export default function MovieDetail() {
           <p className="mb-2 text-justify">{movie.overview}</p>
 
           <div className="mt-4 text-left">
-            <h2 className="text-xl font-semibold">Cast:</h2>
-            <ul>
-              {cast?.map((actor) => (
-                <li key={actor.id}>
-                  {actor.name} as {actor.character}
-                </li>
+            <h2 className="text-xl font-semibold mb-2">Cast</h2>
+            <div className="flex items-center pl-2">
+              {cast?.map((actor, index) => (
+                <div
+                  key={actor.id}
+                  className={`w-12 h-12 rounded-full border-3 border-background overflow-hidden ${
+                    index !== 0 ? "-ml-2" : ""
+                  }`}
+                >
+                  <img
+                    src={
+                      actor.profile_path
+                        ? `https://image.tmdb.org/t/p/w185${actor.profile_path}`
+                        : "https://via.placeholder.com/60x60?text=No+Img"
+                    }
+                    alt={actor.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
-          <p className="mt-4 text-left">
-            <strong>Rating:</strong> {movie.vote_average} / 10
-          </p>
+          {/* Director and Ratings */}
+          <div className="mt-4 text-left">
+            <p className="mb-1">
+              <strong>Director:</strong> {director?.name}
+            </p>
 
-          <p className="text-left">
-            <strong>Director:</strong> {director?.name}
-          </p>
+            <h2 className="text-xl font-semibold mb-2">Ratings</h2>
+            <div className="flex items-center gap-2">
+              <span className="text-3xl font-bold">
+                {movie.vote_average.toFixed(1)}
+              </span>
+              <span className="text-red-500">★★★★★</span>
+            </div>
+            <p className="text-sm text-gray-400 mb-2">
+              {movie.vote_count?.toLocaleString()} reviews
+            </p>
 
-          <div className="mt-6 text-left">
-            <h2 className="text-xl font-semibold">Reviews:</h2>
-            {reviews.map((review) => (
-              <div key={review.id} className="my-4 p-3 bg-gray-800 rounded">
-                <p className="text-sm text-gray-300">By {review.author}</p>
-                <p className="text-sm mt-2">
-                  {review.content.slice(0, 200)}...
-                </p>
+            {/* Simple rating bar */}
+            {[5, 4, 3, 2, 1].map((stars, i) => (
+              <div key={stars} className="flex items-center gap-2 text-sm mb-1">
+                <span>{stars}</span>
+                <div className="w-full h-2 bg-gray-700 rounded overflow-hidden">
+                  <div
+                    className="bg-red-700 h-full"
+                    style={{ width: `${40 - i * 10}%` }}
+                  ></div>
+                </div>
               </div>
             ))}
+          </div>
+
+          {/* Reviews */}
+          <div className="mt-6 text-left">
+            <h2 className="text-xl font-semibold mb-3">Reviews</h2>
+            {reviews.length === 0 ? (
+              <p className="text-gray-400">
+                No reviews available for this movie.
+              </p>
+            ) : (
+              reviews.map((review) => (
+                <div
+                  key={review.id}
+                  className="my-4 p-4 rounded bg-[#2A2A2A] text-sm text-gray-100"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <img
+                      src={`https://ui-avatars.com/api/?name=${review.author}&background=5E0B0B&color=fff`}
+                      alt={review.author}
+                      className="w-8 h-8 rounded-full"
+                    />
+                    <div>
+                      <p className="font-semibold">{review.author}</p>
+                      <p className="text-xs text-gray-400">
+                        {new Date(review.created_at).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-1 text-red-500 mb-2">
+                    {"★★★★★".slice(
+                      0,
+                      Math.min(review.author_details.rating || 5, 5)
+                    )}
+                  </div>
+
+                  <p className="text-gray-300">
+                    {review.content.slice(0, 200)}...
+                  </p>
+
+                  <div className="mt-3 flex gap-4 text-xs text-gray-400">
+                    <span>👍 {Math.floor(Math.random() * 20) + 1}</span>
+                    <span>💬 {Math.floor(Math.random() * 5)}</span>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
 
           <h2 className="text-xl text-left font-semibold mt-5 mb-2">

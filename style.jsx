@@ -18,7 +18,7 @@ export const Main2 = styled.main`
 
 export const Main3 = styled.main`
   background: linear-gradient(rgba(19, 4, 5, 0.4), rgba(1, 1, 10, 0.8)),
-    url('../src/assets/Images/background2.png');
+    url('../src/assets/Images/background3.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover; 
@@ -26,7 +26,7 @@ export const Main3 = styled.main`
 
 export const Main4 = styled.main`
   background: linear-gradient(rgba(19, 4, 5, 0.4), rgba(1, 1, 10, 0.8)),
-    url('../src/assets/Images/background2.png');
+    url('../src/assets/Images/background4.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover; 
@@ -34,7 +34,7 @@ export const Main4 = styled.main`
 
 export const Main5 = styled.main`
   background: linear-gradient(rgba(19, 4, 5, 0.4), rgba(1, 1, 10, 0.8)),
-    url('../src/assets/Images/background2.png');
+    url('../src/assets/Images/background5.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover; 
