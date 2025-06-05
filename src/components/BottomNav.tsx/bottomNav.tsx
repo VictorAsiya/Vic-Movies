@@ -12,7 +12,7 @@ export default function BottomNav() {
   ];
 
   return (
-    <footer className="fixed left-[35.4%] w-full max-w-md bottom-0 bg-input text-white py-3 px-6 flex justify-between items-center shadow-inner z-50">
+    <footer className="fixed lg:left-[35.4%] w-full max-w-md bottom-0 bg-input text-white py-3 px-6 flex justify-between items-center shadow-inner z-50">
       {navItems.map((item) => (
         <Link
           key={item.label}

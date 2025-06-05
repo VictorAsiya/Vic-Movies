@@ -29,7 +29,7 @@ export default function MovieRecs() {
 
   return (
     <SC.Main2 className="min-h-screen flex items-center justify-center bg-background">
-      <div className="bg-container text-light-text rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center justify-center align-center">
+      <div className="bg-container text-light-text lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center justify-center align-center">
         <h2 className="text-[16px] font-semibold mb-2 mt-5">Movies</h2>
 
         <Trending />
