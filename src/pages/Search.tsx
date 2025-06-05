@@ -40,8 +40,8 @@ export default function SearchFunction() {
             }
           />
         </form>
-        <BottomNav />
       </div>
+      <BottomNav />
     </SC.Main3>
   );
 }

@@ -26,8 +26,8 @@ export default function Library() {
             Settings
           </button>
         </span>
-        <BottomNav />
       </div>
+      <BottomNav />
     </SC.Main5>
   );
 }
