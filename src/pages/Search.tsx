@@ -18,7 +18,7 @@ export default function SearchFunction() {
 
   return (
     <SC.Main3 className="min-h-screen flex items-center justify-center bg-background">
-      <div className="bg-container text-light-text p-8 rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center align-top">
+      <div className="bg-container text-light-text py-8 px-3  lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center align-top">
         <span className="flex items-center gap-[33%]">
           <Link to="/">
             <ArrowLeft size={20} className="mb-5" />

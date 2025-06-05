@@ -11,7 +11,7 @@ export default function Register() {
 
   return (
     <SC.Main className="min-h-screen flex items-center justify-center bg-background"> 
-      <div className="bg-container text-light-text p-8 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center align-top">
+      <div className="bg-container text-light-text py-8 px-3  lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center align-top">
         <h2 className="text-[16px] text-left font-semibold mb-10 mt-5">
           Vic Movies Zone
         </h2>
