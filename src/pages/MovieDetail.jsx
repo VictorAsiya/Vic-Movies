@@ -82,7 +82,7 @@ export default function MovieDetail() {
           </h1>
           <p className="mb-2 text-justify">{movie.overview}</p>
 
-          <div className="mt-4 text-left">
+          <div className="mt-6 text-left">
             <h2 className="text-xl font-semibold mb-2">Cast</h2>
             <div className="flex items-center pl-2">
               {cast?.map((actor, index) => (
@@ -107,34 +107,74 @@ export default function MovieDetail() {
           </div>
 
           {/* Director and Ratings */}
-          <div className="mt-4 text-left">
+          <div className="text-left mt-6 ">
             <p className="mb-1">
               <strong>Director:</strong> {director?.name}
             </p>
 
-            <h2 className="text-xl font-semibold mb-2">Ratings</h2>
-            <div className="flex items-center gap-2">
-              <span className="text-3xl font-bold">
-                {movie.vote_average.toFixed(1)}
-              </span>
-              <span className="text-red-500">★★★★★</span>
-            </div>
-            <p className="text-sm text-gray-400 mb-2">
-              {movie.vote_count?.toLocaleString()} reviews
-            </p>
+            <h2 className="text-xl font-semibold mt-6 mb-2">Ratings</h2>
 
-            {/* Simple rating bar */}
-            {[5, 4, 3, 2, 1].map((stars, i) => (
-              <div key={stars} className="flex items-center gap-2 text-sm mb-1">
-                <span>{stars}</span>
-                <div className="w-full h-2 bg-gray-700 rounded overflow-hidden">
-                  <div
-                    className="bg-red-700 h-full"
-                    style={{ width: `${40 - i * 10}%` }}
-                  ></div>
+            {/* <div className="flex">
+              <div>
+                <div className="flex flex-col items-center gap-2">
+                  <span className="text-3xl font-bold">
+                    {movie.vote_average.toFixed(1)}
+                  </span>
+                  <span className="text-red-500">★★★★★</span>
                 </div>
+
+                <p className="text-sm text-gray-400 mb-2">
+                  {movie.vote_count?.toLocaleString()} reviews
+                </p>
               </div>
-            ))}
+
+              {[5, 4, 3, 2, 1].map((stars, i) => (
+                <div
+                  key={stars}
+                  className=" grid grid-rows-1 items-center w-[60%] h-[30vh] bg-amber-300 text-sm mb-1"
+                >
+                  <div className="flex items-center w-[100%]">
+                    <p>{stars}</p>
+                    <div className="w-full h-2 bg-gray-700 rounded overflow-hidden">
+                      <div
+                        className="bg-red-700 h-full"
+                        style={{ width: `${40 - i * 10}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div> */}
+
+            <div className="flex gap-6 mt-5">
+              {/* Ratings Summary */}
+              <div className="flex flex-col items-center justify-start w-[40%] mt-2">
+                <span className="text-3xl font-bold">
+                  {movie.vote_average.toFixed(1)}
+                </span>
+                <span className="text-red-500 text-xl">★★★★★</span>
+                <p className="text-sm text-gray-400 mt-2 text-center">
+                  {movie.vote_count?.toLocaleString()} reviews
+                </p>
+              </div>
+
+              <div className="flex flex-col justify-between w-full gap-2">
+                {[5, 4, 3, 2, 1].map((stars, i) => {
+                  const percentage = 40 - i * 10;
+                  return (
+                    <div key={stars} className="flex items-center gap-2 w-full">
+                      <p className="text-sm w-4">{stars}</p>
+                      <div className="w-full h-2 bg-gray-700 rounded overflow-hidden">
+                        <div
+                          className="h-full bg-red-700"
+                          style={{ width: `${percentage}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           {/* Reviews */}
@@ -148,7 +188,7 @@ export default function MovieDetail() {
               reviews.map((review) => (
                 <div
                   key={review.id}
-                  className="my-4 p-4 rounded bg-[#2A2A2A] text-sm text-gray-100"
+                  className="my-1 py-4 text-sm"
                 >
                   <div className="flex items-center gap-3 mb-2">
                     <img
@@ -158,7 +198,7 @@ export default function MovieDetail() {
                     />
                     <div>
                       <p className="font-semibold">{review.author}</p>
-                      <p className="text-xs text-gray-400">
+                      <p className="text-xs">
                         {new Date(review.created_at).toLocaleDateString()}
                       </p>
                     </div>
@@ -184,7 +224,7 @@ export default function MovieDetail() {
             )}
           </div>
 
-          <h2 className="text-xl text-left font-semibold mt-5 mb-2">
+          <h2 className="mt-4 text-xl text-left font-semibold mb-2">
             Related Movies
           </h2>
           <div className="custom-scroll flex gap-3 overflow-x-auto py-3">

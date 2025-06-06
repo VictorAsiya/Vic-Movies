@@ -12,7 +12,7 @@ export default function Library() {
           <Link to="/">
             <ArrowLeft size={20} className="mb-5" />
           </Link>
-          <h2 className="text-[16px] font-semibold mb-10 mt-5">My Library</h2>
+          <h2 className="text-[16px] font-semibold mb-10 ">My Library</h2>
         </span>
 
         <span className="flex left-0">

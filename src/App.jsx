@@ -5,6 +5,7 @@ import MovieRecs from "./pages/MovieRecs";
 import SearchFunction from "./pages/Search";
 import Library from "./pages/Library";
 import MovieDetail from "./pages/MovieDetail";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/search" element={<SearchFunction />} />
         <Route path="/library" element={<Library />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/profile" element={<Profile />} />
 
         <Route path="*" element={<div className="p-8">Page not found</div>} />
       </Routes>
