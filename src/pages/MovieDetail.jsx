@@ -15,6 +15,20 @@ export default function MovieDetail() {
   const [credits, setCredits] = useState(null);
   const [reviews, setReviews] = useState([]);
 
+  const handleAddToWatchlist = () => {
+    const existing = JSON.parse(localStorage.getItem("watchlist")) || [];
+
+    // Avoid duplicates
+    const isAlreadyAdded = existing.find((item) => item.id === movie.id);
+    if (!isAlreadyAdded) {
+      const newWatchlist = [...existing, movie];
+      localStorage.setItem("watchlist", JSON.stringify(newWatchlist));
+      alert("Added to watchlist");
+    } else {
+      alert("Movie already in watchlist");
+    }
+  };
+
   useEffect(() => {
     const fetchMovie = async () => {
       const res = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}`);
@@ -43,7 +57,6 @@ export default function MovieDetail() {
         `${BASE_URL}/movie/${id}/reviews?api_key=${API_KEY}`
       );
       const data = await res.json();
-      console.log("Reviews fetched:", data); // Add this line
       setReviews(data.results.slice(0, 2));
     }
 
@@ -186,10 +199,7 @@ export default function MovieDetail() {
               </p>
             ) : (
               reviews.map((review) => (
-                <div
-                  key={review.id}
-                  className="my-1 py-4 text-sm"
-                >
+                <div key={review.id} className="my-1 py-4 text-sm">
                   <div className="flex items-center gap-3 mb-2">
                     <img
                       src={`https://ui-avatars.com/api/?name=${review.author}&background=5E0B0B&color=fff`}
@@ -245,7 +255,10 @@ export default function MovieDetail() {
             ))}
           </div>
 
-          <button className=" cursor-pointer mt-6 w-full bg-red-700 py-2 rounded-md mb-12 text-white hover:bg-red-800">
+          <button
+            onClick={handleAddToWatchlist}
+            className=" cursor-pointer mt-6 w-full bg-red-700 py-2 rounded-md mb-12 text-white hover:bg-red-800"
+          >
             Add to Watchlist
           </button>
         </div>
