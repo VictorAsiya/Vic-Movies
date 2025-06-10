@@ -1,22 +1,26 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Register from "./pages/Register";
+import Login from "./pages/Login";
 import MovieRecs from "./pages/MovieRecs";
 import SearchFunction from "./pages/Search";
 import Library from "./pages/Library";
 import MovieDetail from "./pages/MovieDetail";
 import Profile from "./pages/Profile";
+import LandingPage from "./pages/LandingPage";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<MovieRecs />} />
+        <Route path="/log_In" element={<Login />} />
+        <Route path="/sign_Up" element={<SignUp />} />
+        <Route path="/Home" element={<MovieRecs />} />
         <Route path="/search" element={<SearchFunction />} />
         <Route path="/library" element={<Library />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<LandingPage />} />
 
         <Route path="*" element={<div className="p-8">Page not found</div>} />
       </Routes>

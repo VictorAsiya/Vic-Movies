@@ -3,11 +3,17 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import BottomNav from "../components/BottomNav.tsx/bottomNav";
 import * as SC from "../../style";
+import { genreMap } from "../assets/genres/genresMap";
+import { CustomButton } from "../components/button";
 
 type Movie = {
   id: number;
   title: string;
   poster_path?: string;
+  release_date?: string;
+  runtime?: number;
+  genre_ids?: number[]; // If you're using genre IDs from TMDB
+  genres?: { id: number; name: string }[];
 };
 
 export default function Library() {
@@ -36,9 +42,29 @@ export default function Library() {
             <Link
               to={`/movie/${movie.id}`}
               key={movie.id}
-              className="rounded-md w-[100%] h-[20vh] flex justify-between bg-input py-1 pr-1 overflow-hidden"
+              className="rounded-md w-full h-[20vh] flex justify-between bg-input py-1 pr-1 overflow-hidden"
             >
-              <p className="p-2 text-sm">{movie.title}</p>
+              <div className="flex flex-col  text-left p-2 w-[60%] relative">
+                <p className="text-gray-400">
+                  {movie.genre_ids
+                    ?.map((id) => genreMap[id])
+                    .filter(Boolean)
+                    .join(", ") || "Unknown Genre"}
+                </p>
+                <h2 className=" font-bold">{movie.title}</h2>
+                <div className="text-xs text-gray-400 mt-1">
+                  <p>
+                    {movie.release_date
+                      ? new Date(movie.release_date).getFullYear()
+                      : "Unknown Year"}{" "}
+                    •{" "}
+                    {movie.runtime
+                      ? `${movie.runtime} mins`
+                      : "Duration Unknown"}
+                  </p>
+                </div>
+              </div>
+
               <img
                 src={
                   movie.poster_path
@@ -46,8 +72,13 @@ export default function Library() {
                     : "https://via.placeholder.com/200x300?text=No+Image"
                 }
                 alt={movie.title}
-                className="rounded-md"
+                className="rounded-md object-cover h-full"
               />
+              {/* <CustomButton
+                type={"submit"}
+              title={"Remove"}
+              className="w-[5%] bg-buttons p-[6px] absolute mt-20 ml-2"
+              /> */}
             </Link>
           ))}
         </div>
