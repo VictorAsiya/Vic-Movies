@@ -1,28 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import { CustomInput } from "../components/input";
 import { CustomButton } from "../components/button";
 import { EyeOff, Eye } from "lucide-react";
 import * as SC from "../../style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import API from "../../api/axios";
 
 export default function LogIn() {
-  const [Username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [identifier, setIdentifier] = useState(""); // username or email
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await API.post("/auth/login", {
+        email: identifier, // assuming email is used; change to username if needed
+        password,
+      });
+
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("username", res.data.user.username); // Store user's name
+      navigate("/home"); // redirect after successful login
+
+    } catch (error) {
+      setErrorMsg(error.response?.data?.message || "Login failed.");
+    }
+  };
 
   return (
     <SC.Main className="min-h-screen flex items-center justify-center bg-background">
-      <div className="bg-container text-light-text py-8 px-3  lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center align-top">
+      <div className="bg-container text-light-text py-8 px-3 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center">
         <h2 className="text-[16px] text-left font-semibold mb-10 mt-5">
           Vic Movies Zone
         </h2>
         <h2 className="text-2xl font-bold mb-4">Welcome Back</h2>
-        <form className="space-y-4">
+
+        <form onSubmit={handleLogin} className="space-y-4">
           <CustomInput
-            name={"name"}
-            placeholder="Username / Email"
-            value={Username}
-            onChange={(e) => setUsername(e.target.value)}
+            name="email"
+            placeholder="Email"
+            value={identifier}
+            onChange={(e) => setIdentifier(e.target.value)}
             rightIcon={null}
           />
 
@@ -41,27 +63,32 @@ export default function LogIn() {
               </button>
             }
           />
-          <p className="text-btn-text text-left">Forgot Password?</p>
+
+          {errorMsg && <p className="text-red-500 text-sm">{errorMsg}</p>}
+
+          <p className="text-btn-text text-left cursor-pointer">
+            Forgot Password?
+          </p>
 
           <CustomButton
-            type={"submit"}
-            title={"Log In"}
+            type="submit"
+            title="Log In"
             className="w-full p-3"
           />
 
           <span className="flex justify-between mt-2">
-            <Link to={"/sign_Up"} className="w-[42%]">
+            <Link to="/sign_Up" className="w-[42%]">
               <CustomButton
-                type={"submit"}
-                title={"Sign Up"}
-                className="w-[100%] bg-input p-[6px]"
+                type="button"
+                title="Sign Up"
+                className="w-full bg-input p-[6px]"
               />
             </Link>
 
             <CustomButton
-              type={"submit"}
-              title={"Continue as guest"}
-              className="w-[56%]  bg-input"
+              type="button"
+              title="Continue as guest"
+              className="w-[56%] bg-input"
             />
           </span>
         </form>

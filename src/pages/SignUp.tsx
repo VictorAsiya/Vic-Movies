@@ -101,9 +101,6 @@
 //   );
 // }
 
-
-
-
 import React, { useState } from "react";
 import { CustomInput } from "../components/input";
 import { CustomButton } from "../components/button";
@@ -120,6 +117,8 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleRegister = async (e) => {
@@ -143,8 +142,7 @@ export default function SignUp() {
       });
 
       localStorage.setItem("token", loginRes.data.token);
-      navigate("/dashboard"); // Replace with your dashboard/home route
-
+      navigate("/home"); // Replace with your dashboard/home route
     } catch (error) {
       setErrorMsg(error.response?.data?.message || "Registration failed.");
     }
@@ -163,9 +161,8 @@ export default function SignUp() {
         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
 
         <form onSubmit={handleRegister} className="space-y-4">
-         
-         <CustomInput
-            name= "username"
+          <CustomInput
+            name="username"
             placeholder="User-Name"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -173,7 +170,7 @@ export default function SignUp() {
           />
 
           <CustomInput
-            name= "email"
+            name="email"
             placeholder="Username / Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -199,15 +196,15 @@ export default function SignUp() {
           <CustomInput
             name="confirmPassword"
             placeholder="Confirm Password"
-            type={showPassword ? "text" : "password"}
+            type={showConfirmPassword ? "text" : "password"}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             rightIcon={
               <button
                 type="button"
-                onClick={() => setShowPassword((prev) => !prev)}
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
               >
-                {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             }
           />

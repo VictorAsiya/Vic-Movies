@@ -43,7 +43,7 @@ export default function SearchFunction() {
       <div className="bg-container text-light-text py-8 px-3 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center align-top">
         {/* Header */}
         <span className="flex items-center gap-[33%]">
-          <Link to="/">
+          <Link to="/Home">
             <ArrowLeft size={20} className="mb-5" />
           </Link>
           <h2 className="text-[16px] font-semibold mb-10">Movie Search</h2>

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
-import MovieRecs from "./pages/MovieRecs";
+import Home from "./pages/Home";
 import SearchFunction from "./pages/Search";
 import Library from "./pages/Library";
 import MovieDetail from "./pages/MovieDetail";
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/log_In" element={<Login />} />
         <Route path="/sign_Up" element={<SignUp />} />
-        <Route path="/Home" element={<MovieRecs />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="/search" element={<SearchFunction />} />
         <Route path="/library" element={<Library />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
