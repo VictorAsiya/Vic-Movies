@@ -8,6 +8,7 @@ import MovieDetail from "./pages/MovieDetail";
 import Profile from "./pages/Profile";
 import LandingPage from "./pages/LandingPage";
 import SignUp from "./pages/SignUp";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path="/movie/:id" element={<MovieDetail />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<LandingPage />} />
+        <Route path="/admin" element={<AdminDashboard />} />
+
 
         <Route path="*" element={<div className="p-8">Page not found</div>} />
       </Routes>

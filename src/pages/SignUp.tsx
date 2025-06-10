@@ -137,12 +137,16 @@ export default function SignUp() {
 
       // Automatically login user
       const loginRes = await API.post("/auth/login", {
+        username,
         email,
         password,
       });
 
       localStorage.setItem("token", loginRes.data.token);
-      navigate("/home"); // Replace with your dashboard/home route
+      localStorage.setItem("username", loginRes.data.username);
+      navigate("/home"); 
+
+
     } catch (error) {
       setErrorMsg(error.response?.data?.message || "Registration failed.");
     }
@@ -151,7 +155,7 @@ export default function SignUp() {
   return (
     <SC.Main className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-container text-light-text py-8 px-3 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center">
-        <span className="flex gap-[19vh] items-center mb-4">
+        <span className="flex gap-[30%] items-center mb-4">
           <Link to="/log_In">
             <ArrowLeft size={20} />
           </Link>

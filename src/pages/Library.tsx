@@ -12,7 +12,7 @@ type Movie = {
   poster_path?: string;
   release_date?: string;
   runtime?: number;
-  genre_ids?: number[]; // If you're using genre IDs from TMDB
+  genre_ids?: number[]; 
   genres?: { id: number; name: string }[];
 };
 

@@ -5,6 +5,7 @@ import { EyeOff, Eye } from "lucide-react";
 import * as SC from "../../style";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
+import { jwtDecode } from "jwt-decode";
 
 export default function LogIn() {
   const [identifier, setIdentifier] = useState(""); // username or email
@@ -14,22 +15,35 @@ export default function LogIn() {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const res = await API.post("/auth/login", {
-        email: identifier, // assuming email is used; change to username if needed
-        password,
-      });
+  try {
+    const res = await API.post("/auth/login", {
+      email: identifier,
+      password,
+    });
 
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("username", res.data.user.username); // Store user's name
-      navigate("/home"); // redirect after successful login
+    const token = res.data.token;
+    localStorage.setItem("token", token);
 
-    } catch (error) {
-      setErrorMsg(error.response?.data?.message || "Login failed.");
+    // Decode the token
+    const decoded = jwtDecode<{ isAdmin?: boolean }>(token);
+
+    // Debug output
+    console.log("Decoded Token:", decoded);
+
+    // Navigate based on role
+    if (decoded.isAdmin) {
+      navigate("/admin");
+    } else {
+      navigate("/home");
     }
-  };
+
+  } catch (error) {
+    setErrorMsg(error.response?.data?.message || "Login failed.");
+  }
+};
+
 
   return (
     <SC.Main className="min-h-screen flex items-center justify-center bg-background">

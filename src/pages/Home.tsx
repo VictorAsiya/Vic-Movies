@@ -38,7 +38,7 @@ export default function Home() {
     <SC.Main2 className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-container text-light-text lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center">
         <div className="flex justify-between items-center p-4">
-          <h2 className="text-[16px] font-semibold">Welcome, {username || "Guest"}</h2>
+          <h2 className="text-[16px] font-semibold text-transform: capitalize">Welcome, {username || "Guest"}</h2>
           <Link to="/profile">
             <UserCircle size={28} className="text-light-text hover:scale-105 transition-transform" />
           </Link>
