@@ -1,4 +1,3 @@
-
 // require('dotenv').config();
 // const express = require('express');
 // const cors = require('cors');
@@ -24,38 +23,29 @@
 
 // module.exports = app;
 
-
-
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./config/db');
-const baseRouter = require('./routes');
-const morgan = require('morgan');
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const connectDB = require("./config/db");
+const baseRouter = require("./routes");
+const morgan = require("morgan");
 
 const app = express();
 
 // ✅ CORS Configuration
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://vic-movies.vercel.app',
-  'https://vic-movies-git-frontend-victor-asiyas-projects.vercel.app'
-];
-
-app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error('Not allowed by CORS'));
-    }
-  },
+const corsOptions = {
+  origin: [
+    "http://localhost:5173",
+    "https://vic-movies.vercel.app",
+    "https://vic-movies-git-frontend-victor-asiyas-projects.vercel.app",
+  ],
   credentials: true,
-}));
+};
+
+app.use(cors(corsOptions));
 
 // ✅ Handle preflight OPTIONS requests
-app.options('*', cors());
+app.options("*", cors(corsOptions));
 
 // ✅ Middleware
 app.use(express.json());
@@ -73,4 +63,3 @@ app.get("/", (req, res) => {
 app.use("/api", baseRouter);
 
 module.exports = app;
-
