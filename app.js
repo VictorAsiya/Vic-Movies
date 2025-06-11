@@ -35,30 +35,42 @@ const morgan = require('morgan');
 
 const app = express();
 
-// ✅ Proper CORS setup for Vercel frontend
+// ✅ CORS Configuration
 const allowedOrigins = [
-  'http://localhost:5173', // for local development
-  'https://vic-movies.vercel.app' // your live frontend on Vercel
+  'http://localhost:5173',
+  'https://vic-movies.vercel.app',
+  'https://vic-movies-git-frontend-victor-asiyas-projects.vercel.app'
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
-  credentials: true
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
 }));
 
-// Middleware
+// ✅ Handle preflight OPTIONS requests
+app.options('*', cors());
+
+// ✅ Middleware
 app.use(express.json());
 app.use(morgan("dev"));
 
-// Connect DB
+// ✅ Connect DB
 connectDB();
 
-// Default route
+// ✅ Test route
 app.get("/", (req, res) => {
   res.json("Welcome to movie app web service...");
 });
 
-// Routes
+// ✅ Routes
 app.use("/api", baseRouter);
 
 module.exports = app;
+
