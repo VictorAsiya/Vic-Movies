@@ -158,7 +158,7 @@ export default function SignUp() {
           <Link to="/log_In" className="absolute">
             <ArrowLeft size={20} />
           </Link>
-          <h2 className="text-[16px] font-semibold mb-8">Vic Movies Zone</h2>
+          <h2 className="text-[16px] text-center font-semibold mb-8">Vic Movies Zone</h2>
 
         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
 
