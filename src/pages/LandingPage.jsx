@@ -39,7 +39,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-6 text-center text-gray-500 bg-black mt-auto">
+      <footer className="py-6 text-center text-gray-500 mt-auto">
         &copy; {new Date().getFullYear()} Vic Movies Hub. All rights reserved.
       </footer>
     </SC.Main7>
