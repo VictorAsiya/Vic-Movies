@@ -61,7 +61,6 @@ export const Main8 = styled.main`
   background: linear-gradient(rgba(19, 4, 5, 0.8), rgba(1, 1, 10, 0.9)),
     url('/background/background8.jpg');
   background-position: center;
-  // opacity: 0.;
   background-repeat: no-repeat;
   background-size: cover; 
 `;
