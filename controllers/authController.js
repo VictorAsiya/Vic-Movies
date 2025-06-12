@@ -122,7 +122,10 @@ exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const identifier = req.body.identifier; // could be username or email
+    const user = await User.findOne({
+    $or: [{ email: identifier }, { username: identifier }],
+    });
     if (!user || !(await user.matchPassword(password))) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
