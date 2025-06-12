@@ -11,10 +11,16 @@
 
 import axios from 'axios';
 
+const baseURL =
+  import.meta.env.MODE === "development"
+    ? import.meta.env.VITE_DEV_BASE_URL
+    : import.meta.env.VITE_PROD_BASE_URL;
+
 const API = axios.create({
-  baseURL: import.meta.env.VITE_PROD_BASE_URL,
+  baseURL,
   withCredentials: true,
 });
+
 
 // Automatically attach the token to every request if it exists
 API.interceptors.request.use(

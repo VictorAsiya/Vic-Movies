@@ -135,7 +135,7 @@ export default function LogIn() {
 
     try {
       const res = await API.post("/auth/login", {
-        email: identifier,
+        identifier,
         password,
       });
 

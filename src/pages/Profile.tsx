@@ -55,9 +55,11 @@ export default function Profile() {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await API.post("/auth/logout");
     localStorage.removeItem("token");
-    navigate("/log_in");
+    localStorage.removeItem("username");
+    navigate("/log_In");
   };
 
   return (
