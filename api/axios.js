@@ -12,7 +12,8 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'https://vic-movies.onrender.com',
+  // baseURL: 'https://vic-movies.onrender.com',
+  baseURL: import.meta.env.VITE_PROD_BASE_URL,
   withCredentials: true,
 });
 
