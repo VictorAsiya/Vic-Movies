@@ -35,15 +35,19 @@ const baseRouter = require('./routes');
 const morgan = require('morgan');
 const app = express();
 
-const allowedOrigins = [process.env.APP_URL]; // E.g., 'https://vic-movies.vercel.app'
+
+const allowedOrigins = [
+  process.env.APP_URL,
+  "http://localhost:5173",  // or your Vite dev URL
+];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin like Postman or curl
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      console.log("Blocked by CORS:", origin);
+      callback(new Error("Not allowed by CORS"));
     }
   },
   credentials: true,

@@ -9,5 +9,4 @@ const baseRouter = router()
 baseRouter.use("/auth", authRouter)
 baseRouter.use("/users", usersRouter)
 baseRouter.use("/admin", adminRouter)
-
 module.exports= baseRouter
