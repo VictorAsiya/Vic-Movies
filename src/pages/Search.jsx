@@ -7,15 +7,10 @@ import * as SC from "../../style";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
-type Movie = {
-  id: number;
-  title: string;
-  poster_path: string | null;
-};
 
 export default function SearchFunction() {
   const [movieName, setMovieName] = useState("");
-  const [searchResults, setSearchResults] = useState<Movie[]>([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async (e) => {
