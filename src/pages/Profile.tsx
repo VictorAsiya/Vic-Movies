@@ -17,7 +17,7 @@ export default function Profile() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const { data } = await API.get("/auth/me"); // Adjust endpoint if needed
+        const { data } = await API.get("/api/auth/me"); // Adjust endpoint if needed
         setUsername(data.username);
         setNewUsername(data.username);
       } catch (err) {
@@ -31,7 +31,7 @@ export default function Profile() {
   const handleUpdate = async () => {
     try {
       setLoading(true);
-      await API.put("/auth/update", { username: newUsername });
+      await API.put("/api/auth/update", { username: newUsername });
       setUsername(newUsername);
       alert("Username updated!");
     } catch (err) {
@@ -70,7 +70,7 @@ export default function Profile() {
           <Link to="/home">
             <ArrowLeft size={20} />
           </Link>
-          <h2 className="text-xl font-semibold ">Profile</h2>
+          <h2 className="text-xl font-semibold ">Hello {username}</h2>
           <Link to="/home">
             <img src={logo} alt="" className="h-10" />
           </Link>
@@ -81,7 +81,7 @@ export default function Profile() {
 
         <CustomInput
           name="username"
-          placeholder="Your User-Name"
+          placeholder="New User-Name"
           value={newUsername}
           onChange={(e) => setNewUsername(e.target.value)}
           rightIcon={null}
