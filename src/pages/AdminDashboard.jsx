@@ -111,7 +111,7 @@ export default function AdminDashboard() {
     try {
       const token = localStorage.getItem("token");
 
-      await API.delete(`/api/users/${userId}`, {
+      await API.delete(`/api/admin/user/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
