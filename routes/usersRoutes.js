@@ -22,8 +22,8 @@ const usersRouter = router();
 usersRouter.get("/", verifyToken, verifyAdmin, getAllUsers);
 
 // User routes
-usersRouter.put("/profile", verifyToken, updateUser);
-usersRouter.delete("/profile", verifyToken, deleteUser);
+usersRouter.put("/update", verifyToken, updateUser);
+usersRouter.delete("/delete", verifyToken, deleteUser);
 usersRouter.post("/logout", verifyToken, logoutUser);
 
 module.exports = usersRouter;
