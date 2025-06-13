@@ -17,7 +17,7 @@ export default function Profile() {
   useEffect(() => {
     async function fetchUser() {
       try {
-        const { data } = await API.get("/api/auth/me"); // Adjust endpoint if needed
+        const { data } = await API.get("/api/auth/me");
         setUsername(data.username);
         setNewUsername(data.username);
       } catch (err) {
