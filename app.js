@@ -38,12 +38,12 @@ const app = express();
 
 const allowedOrigins = [
   process.env.APP_URL,
-  "http://localhost:5173",  
+  "http://localhost:5173",
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
       callback(null, true);
     } else {
       console.log("Blocked by CORS:", origin);
@@ -53,6 +53,7 @@ app.use(cors({
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
+
 
 // Middleware
 app.use(express.json());
