@@ -108,6 +108,7 @@ import { EyeOff, Eye, ArrowLeft } from "lucide-react";
 import * as SC from "../../style";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
+import logo from "/logo.png";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -143,7 +144,7 @@ export default function SignUp() {
       });
 
       localStorage.setItem("token", loginRes.data.token);
-      localStorage.setItem("username", loginRes.data.user.username); 
+      localStorage.setItem("username", loginRes.data.user.username);
       navigate("/home");
     } catch (error) {
       setErrorMsg(error.response?.data?.message || "Registration failed.");
@@ -153,12 +154,17 @@ export default function SignUp() {
   return (
     <SC.Main className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-container text-light-text py-8 px-3 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center">
-        <Link to="/log_In" className="absolute">
-          <ArrowLeft size={20} />
-        </Link>
-        <h2 className="text-[16px] text-center font-semibold mb-8">
-          Vic Movies Zone
-        </h2>
+        <span className=" flex justify-between items-center p-4 mb-5">
+          <Link to="/log_In">
+            <ArrowLeft size={20} />
+          </Link>
+          <h2 className="text-[16px] text-left font-semibold">
+            Vic Movies Zone
+          </h2>
+          <Link to="/home">
+            <img src={logo} alt="" className="h-10" />
+          </Link>
+        </span>
 
         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
 
