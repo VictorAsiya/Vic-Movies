@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import logo from '/logo.png'
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import BottomNav from "../components/BottomNav.tsx/bottomNav";
@@ -89,11 +90,14 @@ export default function Library() {
   return (
     <SC.Main5 className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-container text-light-text py-8 px-3 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen mb-12 flex flex-col text-center align-top">
-        <span className="flex items-center gap-[33%]">
+        <span className=" flex justify-between items-center p-4 mb-5">
           <Link to="/Home">
-            <ArrowLeft size={20} className="mb-5" />
+            <ArrowLeft size={20} />
           </Link>
-          <h2 className="text-[16px] font-semibold mb-10">My Library</h2>
+          <h2 className="text-[16px] font-semibold">My Library</h2>
+          <Link to= '/home'>
+          <img src={logo} alt="" className="h-10"/>
+          </Link>
         </span>
 
         {/* Toggle Buttons */}

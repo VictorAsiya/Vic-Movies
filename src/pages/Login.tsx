@@ -44,7 +44,6 @@
 //   }
 // };
 
-
 //   return (
 //     <SC.Main className="min-h-screen flex items-center justify-center bg-background">
 //       <div className="bg-container text-light-text py-8 px-3 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center">
@@ -111,9 +110,6 @@
 //   );
 // }
 
-
-
-
 import React, { useState } from "react";
 import { CustomInput } from "../components/input";
 import { CustomButton } from "../components/button";
@@ -122,6 +118,7 @@ import * as SC from "../../style";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
 import { jwtDecode } from "jwt-decode";
+import logo from "/logo.png";
 
 export default function LogIn() {
   const [identifier, setIdentifier] = useState(""); // username or email
@@ -135,7 +132,7 @@ export default function LogIn() {
 
     try {
       const res = await API.post("/auth/login", {
-        identifier,
+        email: identifier,
         password,
       });
 
@@ -160,9 +157,14 @@ export default function LogIn() {
   return (
     <SC.Main className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-container text-light-text py-8 px-3 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center">
-        <h2 className="text-[16px] text-left font-semibold mb-10 mt-5">
-          Vic Movies Zone
-        </h2>
+        <span className=" flex justify-between items-center p-4 mb-5">
+          <h2 className="text-[16px] text-left font-semibold">
+            Vic Movies Zone
+          </h2>
+          <Link to="/home">
+            <img src={logo} alt="" className="h-10" />
+          </Link>
+        </span>
         <h2 className="text-2xl font-bold mb-4">Welcome Back</h2>
 
         <form onSubmit={handleLogin} className="space-y-4">

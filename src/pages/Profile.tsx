@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as SC from "../../style";
+import logo from "/logo.png";
 import BottomNav from "../components/BottomNav.tsx/bottomNav";
 import API from "../../api/axios"; // your axios setup file
 import { useNavigate, Link } from "react-router-dom";
@@ -65,10 +66,15 @@ export default function Profile() {
   return (
     <SC.Main6 className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-container text-light-text py-8 px-4 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center">
-        <Link to="/home" className="absolute">
-          <ArrowLeft size={20} />
-        </Link>
-        <h2 className="text-xl font-semibold mb-10">Profile</h2>
+        <span className="flex justify-between items-center px-3 mb-5">
+          <Link to="/home">
+            <ArrowLeft size={20} />
+          </Link>
+          <h2 className="text-xl font-semibold ">Profile</h2>
+          <Link to="/home">
+            <img src={logo} alt="" className="h-10" />
+          </Link>
+        </span>
 
         <p className="text-sm mb-2 text-gray-400 text-left">Update Details:</p>
         <p className="text-lg font-medium mb-4">{username}</p>

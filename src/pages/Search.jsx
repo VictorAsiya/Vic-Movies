@@ -4,6 +4,7 @@ import { ArrowLeft, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import BottomNav from "../components/BottomNav.tsx/bottomNav";
 import * as SC from "../../style";
+import logo from '/logo.png'
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -37,11 +38,14 @@ export default function SearchFunction() {
     <SC.Main3 className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-container text-light-text py-8 px-3 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center align-top">
         {/* Header */}
-        <span className="flex items-center gap-[33%]">
+        <span className="flex justify-between items-center px-3 mb-5 ">
           <Link to="/Home">
-            <ArrowLeft size={20} className="mb-5" />
+            <ArrowLeft size={20} />
           </Link>
-          <h2 className="text-[16px] font-semibold mb-10">Movie Search</h2>
+          <h2 className="text-[16px] font-semibold">Movie Search</h2>
+          <Link to="/home">
+            <img src={logo} alt="" className="h-10" />
+          </Link>
         </span>
 
         {/* Search Input */}

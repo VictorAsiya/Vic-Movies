@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as SC from "../../style";
+import logo from '/logo.png'
 
 export default function LandingPage() {
   return (
     
     <SC.Main7 className="min-h-screen flex flex-col items-center justify-center bg-background text-white">
-      {/* Hero Section */}
+      <img src={logo} alt="" className="h-20 absolute top-5 left-5"/>
       <section className="flex flex-col items-center justify-center text-center py-20 px-6 ">
         <h1 className="text-4xl md:text-6xl font-bold mb-4">Discover Your Next Favorite Movie</h1>
         <p className="text-gray-300 text-lg md:text-xl max-w-2xl mb-8">

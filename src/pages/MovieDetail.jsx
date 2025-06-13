@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import logo from '/logo.png';
 import { Link } from "react-router-dom";
 import { ArrowLeft, Bookmark } from "lucide-react";
 import * as SC from "../../style";
@@ -77,6 +78,9 @@ export default function MovieDetail() {
         <span className="flex justify-between items-center px-3 mb-5">
           <Link to="/Home">
             <ArrowLeft size={20} />
+          </Link>
+          <Link to="/home">
+            <img src={logo} alt="" className="h-10" />
           </Link>
           <Link to="/library">
             <Bookmark size={20} className="float-right" />
