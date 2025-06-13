@@ -138,6 +138,7 @@ exports.loginUser = async (req, res) => {
 
     res.json({
       success: true,
+      username: user.username,
       user: {
         _id: user._id,
         username: user.username,
