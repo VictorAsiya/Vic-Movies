@@ -85,7 +85,7 @@ export default function AdminDashboard() {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await API.get("/users", {
+        const res = await API.get("/api/users", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
