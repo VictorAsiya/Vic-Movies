@@ -76,7 +76,7 @@ export default function Profile() {
           </Link>
         </span>
 
-        <p className="text-sm mb-2 text-gray-400 text-left">Update Details:</p>
+        <p className="text-sm mb-2 text-gray-400 text-left">Update your details:</p>
         <p className="text-lg font-medium mb-4">{username}</p>
 
         <CustomInput
