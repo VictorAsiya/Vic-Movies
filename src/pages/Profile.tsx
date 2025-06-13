@@ -10,6 +10,7 @@ import { ArrowLeft } from "lucide-react";
 export default function Profile() {
   const [username, setUsername] = useState("");
   const [newUsername, setNewUsername] = useState("");
+  const [isFetching, setIsFetching] = useState(true);
   const [updateLoading, setUpdateLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [logoutLoading, setLogoutLoading] = useState(false);
@@ -29,6 +30,8 @@ export default function Profile() {
         setNewUsername(data.username);
       } catch (err) {
         console.error("Error fetching user:", err);
+      } finally {
+        setIsFetching(false);
       }
     }
 
@@ -70,7 +73,7 @@ export default function Profile() {
         },
       });
       localStorage.removeItem("token");
-      navigate("/login");
+      navigate("/");
     } catch (err) {
       alert("Failed to delete account.");
       console.error(err);
@@ -109,9 +112,11 @@ export default function Profile() {
           <Link to="/home">
             <ArrowLeft size={20} />
           </Link>
-          <h2 className="text-xl font-semibold">Hello {username}</h2>
+          <h2 className="text-xl font-semibold">
+            {isFetching ? "Hello..." : `Hello ${username}`}
+          </h2>
           <Link to="/home">
-            <img src={logo} alt="" className="h-10" />
+            <img src={logo} alt="Logo" className="h-10" />
           </Link>
         </span>
 
