@@ -47,7 +47,7 @@ export default function Profile() {
       return;
 
     try {
-      await API.delete("/auth/delete");
+      await API.delete("/api/auth/delete");
       localStorage.removeItem("token");
       navigate("/login");
     } catch (err) {
@@ -57,7 +57,7 @@ export default function Profile() {
   };
 
   const handleLogout = async () => {
-    await API.post("/auth/logout");
+    await API.post("/api/auth/logout");
     localStorage.removeItem("token");
     localStorage.removeItem("username");
     navigate("/log_In");

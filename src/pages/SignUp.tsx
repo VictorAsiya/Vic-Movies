@@ -136,7 +136,7 @@ export default function SignUp() {
       });
 
       // Automatically login user
-      const loginRes = await API.post("/auth/login", {
+      const loginRes = await API.post("/api/auth/login", {
         username,
         email,
         password,
