@@ -165,12 +165,12 @@ export default function LogIn() {
             <img src={logo} alt="" className="h-10" />
           </Link>
         </span>
-        <h2 className="text-2xl font-bold mb-4">Welcome Back</h2>
+        <h2 className="text-2xl font-bold mb-4">Welcome</h2>
 
         <form onSubmit={handleLogin} className="space-y-4">
           <CustomInput
             name="email"
-            placeholder="Email"
+            placeholder="Email or User-Name"
             value={identifier}
             onChange={(e) => setIdentifier(e.target.value)}
             rightIcon={null}
