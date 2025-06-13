@@ -38,7 +38,7 @@ const app = express();
 
 const allowedOrigins = [
   process.env.APP_URL,
-  "http://localhost:5173",  // or your Vite dev URL
+  "http://localhost:5173",  
 ];
 
 app.use(cors({

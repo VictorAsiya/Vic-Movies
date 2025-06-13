@@ -122,7 +122,7 @@ exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const identifier = req.body.identifier; // could be username or email
+    const identifier = req.body.identifier || req.body.email;
     const user = await User.findOne({
     $or: [{ email: identifier }, { username: identifier }],
     });
