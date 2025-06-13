@@ -179,7 +179,7 @@ export default function SignUp() {
 
           <CustomInput
             name="email"
-            placeholder="Username / Email"
+            placeholder="Email (N/B: case sensitive)"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             rightIcon={null}
