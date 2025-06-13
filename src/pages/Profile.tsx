@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import * as SC from "../../style";
 import logo from "/logo.png";
 import BottomNav from "../components/BottomNav.tsx/bottomNav";
-import API from "../../api/axios"; // your axios setup file
+import API from "../../api/axios";
 import { useNavigate, Link } from "react-router-dom";
 import { CustomInput } from "../components/input";
 import { ArrowLeft } from "lucide-react";
@@ -10,14 +10,21 @@ import { ArrowLeft } from "lucide-react";
 export default function Profile() {
   const [username, setUsername] = useState("");
   const [newUsername, setNewUsername] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [updateLoading, setUpdateLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [logoutLoading, setLogoutLoading] = useState(false);
   const navigate = useNavigate();
 
   // Fetch user info on mount
   useEffect(() => {
     async function fetchUser() {
       try {
-        const { data } = await API.get("/api/auth/me");
+        const token = localStorage.getItem("token");
+        const { data } = await API.get("/api/auth/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setUsername(data.username);
         setNewUsername(data.username);
       } catch (err) {
@@ -30,37 +37,69 @@ export default function Profile() {
 
   const handleUpdate = async () => {
     try {
-      setLoading(true);
-      await API.put("/api/auth/update", { username: newUsername });
+      setUpdateLoading(true);
+      const token = localStorage.getItem("token");
+      await API.put(
+        "/api/users/update",
+        { username: newUsername },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setUsername(newUsername);
       alert("Username updated!");
     } catch (err) {
       alert("Update failed");
       console.error(err);
     } finally {
-      setLoading(false);
+      setUpdateLoading(false);
     }
   };
 
   const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to delete your account?"))
-      return;
+    if (!window.confirm("Are you sure you want to delete your account?")) return;
 
     try {
-      await API.delete("/api/auth/delete");
+      setDeleteLoading(true);
+      const token = localStorage.getItem("token");
+      await API.delete("/api/users/delete", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       localStorage.removeItem("token");
       navigate("/login");
     } catch (err) {
       alert("Failed to delete account.");
       console.error(err);
+    } finally {
+      setDeleteLoading(false);
     }
   };
 
   const handleLogout = async () => {
-    await API.post("/api/auth/logout");
-    localStorage.removeItem("token");
-    localStorage.removeItem("username");
-    navigate("/log_In");
+    try {
+      setLogoutLoading(true);
+      const token = localStorage.getItem("token");
+      await API.post(
+        "/api/users/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (err) {
+      console.error("Logout failed", err);
+    } finally {
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      setLogoutLoading(false);
+      navigate("/log_In");
+    }
   };
 
   return (
@@ -70,7 +109,7 @@ export default function Profile() {
           <Link to="/home">
             <ArrowLeft size={20} />
           </Link>
-          <h2 className="text-xl font-semibold ">Hello {username}</h2>
+          <h2 className="text-xl font-semibold">Hello {username}</h2>
           <Link to="/home">
             <img src={logo} alt="" className="h-10" />
           </Link>
@@ -90,24 +129,26 @@ export default function Profile() {
 
         <button
           onClick={handleUpdate}
-          className="bg-blue-600 text-white py-2 rounded mb-4 cursor-pointer"
-          disabled={loading}
+          className="bg-blue-600 text-white py-2 rounded mb-4 cursor-pointer disabled:opacity-50"
+          disabled={updateLoading}
         >
-          {loading ? "Updating..." : "Update Username"}
+          {updateLoading ? "Updating..." : "Update Username"}
         </button>
 
         <button
           onClick={handleDelete}
-          className="bg-red-600 text-white py-2 rounded mb-4 "
+          className="bg-red-600 text-white py-2 rounded mb-4 disabled:opacity-50"
+          disabled={deleteLoading}
         >
-          Delete Account
+          {deleteLoading ? "Deleting..." : "Delete Account"}
         </button>
 
         <button
           onClick={handleLogout}
-          className="bg-gray-700 text-white py-2 rounded cursor-pointer"
+          className="bg-gray-700 text-white py-2 rounded cursor-pointer disabled:opacity-50"
+          disabled={logoutLoading}
         >
-          Log Out
+          {logoutLoading ? "Logging Out..." : "Log Out"}
         </button>
       </div>
 
