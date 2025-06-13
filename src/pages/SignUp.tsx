@@ -143,10 +143,8 @@ export default function SignUp() {
       });
 
       localStorage.setItem("token", loginRes.data.token);
-      localStorage.setItem("username", loginRes.data.username);
-      navigate("/home"); 
-
-
+      localStorage.setItem("username", loginRes.data.user.username); 
+      navigate("/home");
     } catch (error) {
       setErrorMsg(error.response?.data?.message || "Registration failed.");
     }
@@ -155,10 +153,12 @@ export default function SignUp() {
   return (
     <SC.Main className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-container text-light-text py-8 px-3 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center">
-          <Link to="/log_In" className="absolute">
-            <ArrowLeft size={20} />
-          </Link>
-          <h2 className="text-[16px] text-center font-semibold mb-8">Vic Movies Zone</h2>
+        <Link to="/log_In" className="absolute">
+          <ArrowLeft size={20} />
+        </Link>
+        <h2 className="text-[16px] text-center font-semibold mb-8">
+          Vic Movies Zone
+        </h2>
 
         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
 
