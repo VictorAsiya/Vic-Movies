@@ -164,7 +164,7 @@ export default function LogIn() {
           <h2 className="text-[16px] text-left font-semibold">
             Vic Movies Zone
           </h2>
-          <Link to="/home">
+          <Link to={''}>
             <img src={logo} alt="" className="h-10" />
           </Link>
         </span>
