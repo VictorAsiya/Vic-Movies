@@ -90,7 +90,7 @@ export default function Library() {
   return (
     <SC.Main5 className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-container text-light-text py-8 px-3 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen mb-12 flex flex-col text-center align-top">
-        <span className=" flex justify-between items-center p-4 mb-5">
+        <span className=" flex justify-between items-center mb-5">
           <Link to="/Home">
             <ArrowLeft size={20} />
           </Link>

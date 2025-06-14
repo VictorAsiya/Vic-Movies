@@ -119,11 +119,13 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (password !== confirmPassword) {
       return setErrorMsg("Passwords do not match.");
@@ -148,13 +150,15 @@ export default function SignUp() {
       navigate("/home");
     } catch (error) {
       setErrorMsg(error.response?.data?.message || "Registration failed.");
+          setLoading(false);
+
     }
   };
 
   return (
     <SC.Main className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-container text-light-text py-8 px-3 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center">
-        <span className=" flex justify-between items-center p-4 mb-5">
+        <span className=" flex justify-between items-center mb-5">
           <Link to="/log_In">
             <ArrowLeft size={20} />
           </Link>
@@ -219,7 +223,13 @@ export default function SignUp() {
 
           {errorMsg && <p className="text-red-500 text-sm">{errorMsg}</p>}
 
-          <CustomButton type="submit" title="Sign Up" className="w-full p-3" />
+          <CustomButton
+            type="submit"
+            title={loading ? "Loading..." : "Sign Up"}
+            disabled={loading}
+            className="w-full p-3 disabled:opacity-50"
+          />
+
         </form>
       </div>
     </SC.Main>

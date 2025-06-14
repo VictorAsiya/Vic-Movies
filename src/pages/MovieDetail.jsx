@@ -75,7 +75,7 @@ export default function MovieDetail() {
   return (
     <SC.Main4 className="min-h-screen flex items-center justify-center bg-background">
       <div className="bg-container text-light-text py-8 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center align-top">
-        <span className="flex justify-between items-center px-3 mb-5">
+        <span className="flex justify-between items-center mb-5">
           <Link to="/Home">
             <ArrowLeft size={20} />
           </Link>

@@ -125,10 +125,12 @@ export default function LogIn() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true)
 
     try {
       const res = await API.post("/api/auth/login", {
@@ -151,6 +153,7 @@ export default function LogIn() {
       }
     } catch (error) {
       setErrorMsg(error.response?.data?.message || "Login failed.");
+      setLoading(false)
     }
   };
 
@@ -198,21 +201,28 @@ export default function LogIn() {
             Forgot Password?
           </p>
 
-          <CustomButton type="submit" title="Log In" className="w-full p-3" />
+          <CustomButton
+            type="submit"
+            title={loading ? "Logging In..." : "Log In "}
+            className="w-full p-3 disabled:opacity-50"
+            disabled={loading}
+          />
 
           <span className="flex justify-between mt-2">
-            <Link to="/sign_Up" className="w-[42%]">
+            <Link to="/sign_Up" className="w-[42%] disabled:opacity-50">
               <CustomButton
                 type="button"
                 title="Sign Up"
                 className="w-full bg-input p-[6px]"
+                disabled={loading}
               />
             </Link>
 
             <CustomButton
               type="button"
               title="Continue as guest"
-              className="w-[56%] bg-input"
+              className="w-[56%] bg-input disabled:opacity-50"
+              disabled={loading}
             />
           </span>
         </form>
