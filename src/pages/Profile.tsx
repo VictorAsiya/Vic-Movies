@@ -62,7 +62,8 @@ export default function Profile() {
   };
 
   const handleDelete = async () => {
-    if (!window.confirm("Are you sure you want to delete your account?")) return;
+    if (!window.confirm("Are you sure you want to delete your account?"))
+      return;
 
     try {
       setDeleteLoading(true);
@@ -107,20 +108,26 @@ export default function Profile() {
 
   return (
     <SC.Main6 className="min-h-screen flex items-center justify-center bg-background">
-      <div className="bg-container text-light-text py-8 px-4 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center">
+      <div
+        className="bg-[url('/background/background8.jpg')] bg-cover bg-opacity-90
+       text-light-text py-8 px-4 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center"
+      >
+      
         <span className="flex justify-between items-center mb-5">
           <Link to="/home">
             <ArrowLeft size={20} />
           </Link>
           <h2 className="text-xl font-semibold">
-            {isFetching ? "Hello..." : `Hello ${username}`}
+            {isFetching ? "Hello..." : `Hello...`}
           </h2>
           <Link to="/home">
             <img src={logo} alt="Logo" className="h-10" />
           </Link>
         </span>
 
-        <p className="text-sm mb-2 text-gray-400 text-left">Update your details:</p>
+        <p className="text-sm mb-2 text-gray-400 text-left">
+          Update your details:
+        </p>
         <p className="text-lg font-medium mb-4">{username}</p>
 
         <CustomInput

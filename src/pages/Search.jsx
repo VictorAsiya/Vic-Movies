@@ -4,10 +4,9 @@ import { ArrowLeft, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import BottomNav from "../components/BottomNav.tsx/bottomNav";
 import * as SC from "../../style";
-import logo from '/logo.png'
+import logo from "/logo.png";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
-
 
 export default function SearchFunction() {
   const [movieName, setMovieName] = useState("");
@@ -36,26 +35,28 @@ export default function SearchFunction() {
 
   return (
     <SC.Main3 className="min-h-screen flex items-center justify-center bg-background">
-      <div className="bg-container text-light-text py-8 px-3 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center align-top">
+      <div
+        className="bg-[url('/background/background7.jpg')] bg-cover bg-center bg-opacity-50 text-light-text py-8 lg:rounded-2xl shadow-md w-full max-w-md min-h-screen flex flex-col text-center align-top"
+      >
         {/* Header */}
-        <span className="flex justify-between items-center mb-5 ">
+        <span className="flex justify-between items-center mb-5 px-3 ">
           <Link to="/Home">
             <ArrowLeft size={20} />
           </Link>
-          <h2 className="text-[16px] font-semibold">Movie Search</h2>
+          <h2 className="text-[16px] font-bold">Movie Search</h2>
           <Link to="/home">
             <img src={logo} alt="" className="h-10" />
           </Link>
         </span>
 
         {/* Search Input */}
-        <form className="space-y-4" onSubmit={handleSearch}>
+        <form className="space-y-4 px-3" onSubmit={handleSearch}>
           <CustomInput
             name="name"
             placeholder="Input Movie Name"
             value={movieName}
             onChange={(e) => setMovieName(e.target.value)}
-            className="pr-10"
+            className=""
             rightIcon={
               <button type="submit">
                 <Search className="text-gray-400" size={20} />
@@ -95,9 +96,10 @@ export default function SearchFunction() {
             ))}
           </div>
         </div>
+        <div className="fixed bottom-0 w-full max-w-md bg-input text-white py-3 flex justify-between items-center shadow-inner z-50">
+          <BottomNav />
+        </div>
       </div>
-
-      <BottomNav />
     </SC.Main3>
   );
 }

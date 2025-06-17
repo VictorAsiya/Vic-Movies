@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import logo from '/logo.png';
+import logo from "/logo.png";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Bookmark } from "lucide-react";
 import * as SC from "../../style";
@@ -27,6 +27,19 @@ export default function MovieDetail() {
       alert("Added to watchlist");
     } else {
       alert("Movie already in watchlist");
+    }
+  };
+
+  const handleAddToFavorites = () => {
+    const existing = JSON.parse(localStorage.getItem("favorites")) || []; 
+    // Avoid duplicates
+    const isAlreadyAdded = existing.find((item) => item.id === movie.id); 
+    if (!isAlreadyAdded) {
+      const newFavorites = [...existing, movie];  
+      localStorage.setItem("favorites", JSON.stringify(newFavorites));
+      alert("Added to favorites");  
+    } else {
+      alert("Movie already in favorites");
     }
   };
 
@@ -86,12 +99,28 @@ export default function MovieDetail() {
             <Bookmark size={20} className="float-right" />
           </Link>
         </span>
-
-        <img
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt={movie.title}
-          className="w-full max-w-md mb-4"
-        />
+        <div className="relative">
+          <img
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.title}
+            className="w-full max-w-md mb-4 "
+          />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="size-6 absolute top-4 right-5 w-10 h-10 text-white cursor-pointer hover:text-red-800 transition-colors duration-200"
+            onClick={handleAddToFavorites}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+            />
+          </svg>
+        </div>
 
         <div className=" px-3">
           <h1 className="text-[20px] text-left font-bold mb-3">
@@ -130,38 +159,6 @@ export default function MovieDetail() {
             </p>
 
             <h2 className="text-xl font-semibold mt-6 mb-2">Ratings</h2>
-
-            {/* <div className="flex">
-              <div>
-                <div className="flex flex-col items-center gap-2">
-                  <span className="text-3xl font-bold">
-                    {movie.vote_average.toFixed(1)}
-                  </span>
-                  <span className="text-red-500">★★★★★</span>
-                </div>
-
-                <p className="text-sm text-gray-400 mb-2">
-                  {movie.vote_count?.toLocaleString()} reviews
-                </p>
-              </div>
-
-              {[5, 4, 3, 2, 1].map((stars, i) => (
-                <div
-                  key={stars}
-                  className=" grid grid-rows-1 items-center w-[60%] h-[30vh] bg-amber-300 text-sm mb-1"
-                >
-                  <div className="flex items-center w-[100%]">
-                    <p>{stars}</p>
-                    <div className="w-full h-2 bg-gray-700 rounded overflow-hidden">
-                      <div
-                        className="bg-red-700 h-full"
-                        style={{ width: `${40 - i * 10}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div> */}
 
             <div className="flex gap-6 mt-5">
               {/* Ratings Summary */}
